@@ -1,0 +1,19 @@
+---
+- hosts: development
+  become: yes
+  tasks:
+
+    - name: add custom repository
+      yum_repository:
+        name: add docker-ce.repo
+        baseurl: https://download.docker.com/linux/centos/docker-ce.repo
+
+    - name: dnf install list of packages
+      yum:
+        name: "{{packages}}"
+      vars:
+        packages:
+          - docker-ce
+          - docker-ce-cli
+          - jq
+  
