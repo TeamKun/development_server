@@ -1,19 +1,19 @@
 ---
-- hosts: development
+- hosts: all
   become: yes
+
   tasks:
+  - name: add docker-ce repo.
+    shell: "yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo"
+    args:
+      chdir: "/etc/yum.repos.d"
+      creates: docker-ce.repo
 
-    - name: add custom repository
-      yum_repository:
-        name: add docker-ce.repo
-        baseurl: https://download.docker.com/linux/centos/docker-ce.repo
-
-    - name: dnf install list of packages
-      yum:
-        name: "{{packages}}"
-      vars:
-        packages:
-          - docker-ce
-          - docker-ce-cli
-          - jq
-  
+  - name: dnf install list of packages
+    yum:
+      name: "{{packages}}"
+    vars:
+      packages:
+      - docker-ce
+      - docker-ce-cli
+      - jq
