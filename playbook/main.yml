@@ -1,3 +1,4 @@
 ---
+- import_playbook: update_all_pkgs.yml
 - import_playbook: install_docker.yml
 - import_playbook: firewalld_seting.yml

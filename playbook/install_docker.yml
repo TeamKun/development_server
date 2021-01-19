@@ -1,19 +1,44 @@
 ---
 - hosts: all
   become: yes
-
-  tasks:
-  - name: add docker-ce repo.
-    shell: "yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo"
-    args:
-      chdir: "/etc/yum.repos.d"
-      creates: docker-ce.repo
-
-  - name: dnf install list of packages
+  tasks: 
+  - name: Remove docker if installed from CentOS repo
     yum:
-      name: "{{packages}}"
+      name: "{{ packages }}"
+      state: removed
     vars:
       packages:
-      - docker-ce
-      - docker-ce-cli
-      - jq
+      - docker
+      - docker-client
+      - docker-client-latest
+      - docker-common
+      - docker-latest
+      - docker-latest-logrotate
+      - docker-logrotate
+      - docker-engine
+
+  - name: Install yum utils
+    yum:
+      name: "{{ packages }}"
+      state: latest
+    vars:
+        packages:
+        - yum-utils
+        - device-mapper-persistent-data
+        - lvm2
+
+  - name: Add Docker repo
+    get_url:
+      url: https://download.docker.com/linux/centos/docker-ce.repo
+      dest: /etc/yum.repos.d/docker-ce.repo
+
+  - name: Install Docker
+    yum:
+      name: docker-ce
+      state: latest
+
+  - name: Start Docker service
+    service:
+      name: docker
+      state: started
+      enabled: yes

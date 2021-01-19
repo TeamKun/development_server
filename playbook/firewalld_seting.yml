@@ -8,3 +8,9 @@
         port: 25565-25575/tcp
         permanent: yes
         state: enabled
+
+    - name: restart firewalld
+      become: yes
+      systemd:
+        state: restarted
+        name: firewalld
