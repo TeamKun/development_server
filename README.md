@@ -1,26 +1,32 @@
 # development_server
 メンバーが開発時に使用する使い捨てインスタンスを管理するサーバ
 
-# for server develop
+## ローカルでのテスト
+### windowsでの準備
+WSL環境でansibleとVagrantを使えるようにします。
 
-VirtualBox + Vagrant + ansible
+VirtualBoxをwindows側（GUI）でinstallします
+https://www.oracle.com/jp/virtualization/technologies/virtualbox/downloads.html
 
-### Premise for windows 
-This introduction is for WSL(ubuntu)
-
-install VirtualBox(GUI)
-search from oracle page https://www.oracle.com/jp/virtualization/technologies/virtualbox/downloads.html
-
-install Vagrant and ansible(WSL:ubuntu)
+WSLでvagrantとansibleをインストールします。（ansibleはPIP経由です、使えるようにしてください）
 
 ```(bash)
-apt install virtualbox
+apt install vagrant 
 pip3 install ansible
 ```
 
-## boot Vagrant
+### Vagrantで起動するには
+下記コマンドでVMを立ち上げます
 
-`vagrant up`
+```
+vagrant up
+```
+
+このplaybookを検証するには以下のコマンドを使用します
+
+```
+vagrant provision
+```
 
 Vagrant using
 ```(bash)
@@ -28,4 +34,10 @@ vagrant up      #starts and provisions the vagrant environment
 vagrant status  #outputs status of the vagrant machine
 vagrant halt    #stops the vagrant machine
 vagrant destroy #stops and deletes all traces of the vagrant machine
+```
+
+## リモートのサーバに適用するには
+下記コマンドで適用してください。ipaddressは適切なものに変更してください。ipアドレスの後ろの`,`は必須です
+```
+ ansible-playbook -u root -i [ipaddress], playbook/main.yml
 ```
