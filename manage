@@ -1,0 +1,12 @@
+#!/bin/python3
+import netifaces as ni
+import docker
+
+ni.ifaddresses('eth0')
+ip = ni.ifaddresses('eth0')[ni.AF_INET][0]['addr']
+print (ip)
+
+cli = docker.DockerClient()
+
+container_list = cli.containers.list()
+print(container_list)

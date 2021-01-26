@@ -2,44 +2,59 @@
 - hosts: all
   become: yes
   tasks: 
-  - name: Remove docker if installed from CentOS repo
-    yum:
+  - name: Add docker GPG key
+    apt_key:
+      url: https://download.docker.com/linux/ubuntu/gpg
+    become: yes
+
+  - name: Install basic list of packages
+    apt:
       name: "{{ packages }}"
-      state: removed
+      state: present
+      update_cache: yes
     vars:
       packages:
-      - docker
-      - docker-client
-      - docker-client-latest
-      - docker-common
-      - docker-latest
-      - docker-latest-logrotate
-      - docker-logrotate
-      - docker-engine
+        - apt-transport-https
+        - ca-certificates
+        - curl
+        - gnupg-agent
+        - software-properties-common
+    become: yes
 
-  - name: Install yum utils
-    yum:
+  - name: Add apt repository
+    apt_repository:
+      repo: "deb [arch=amd64] https://download.docker.com/linux/ubuntu {{ ansible_distribution_release }} stable"
+    become: yes
+
+  - name: Install Docker packages
+    apt:
       name: "{{ packages }}"
-      state: latest
+      state: present
     vars:
-        packages:
-        - python3
-        - yum-utils
-        - device-mapper-persistent-data
-        - lvm2
+      packages:
+        - docker-ce
+        - docker-ce-cli
+        - containerd.io
+    become: yes
 
-  - name: Add Docker repo
-    get_url:
-      url: https://download.docker.com/linux/centos/docker-ce.repo
-      dest: /etc/yum.repos.d/docker-ce.repo
+  - name: Add user to docker group
+    user:
+      name: "{{ ansible_env.USER }}"
+      groups: docker
+      append: yes
+    become: yes
 
-  - name: Install Docker
-    yum:
-      name: docker-ce
-      state: latest
-
-  - name: Start Docker service
-    service:
+  - name: Ensure docker service is enabled
+    systemd:
       name: docker
       state: started
       enabled: yes
+    become: yes
+
+  - name: Install docker-compose
+    get_url:
+      url: "https://github.com/docker/compose/releases/download/1.28.0/docker-compose-{{ ansible_system }}-{{ ansible_architecture }}"
+      dest: /usr/local/bin/docker-compose
+      mode: +x
+    become: yes
+

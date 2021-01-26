@@ -1,16 +1,9 @@
 ---
 - hosts: all
   become: yes
-
   tasks:
-    - name: "set the port state for minecraft 25565-25575"
-      ansible.posix.firewalld:
-        port: 25565-25575/tcp
-        permanent: yes
-        state: enabled
-
-    - name: restart firewalld
-      become: yes
-      systemd:
-        state: restarted
-        name: firewalld
+  - name: "set the port state for minecraft 25565-25575"
+    ufw:
+      rule: allow
+      port: 25565:25575
+      proto: tcp

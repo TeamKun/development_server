@@ -1,0 +1,26 @@
+---
+- hosts: all
+  become: yes
+  tasks:
+  - name: Install python packages
+    apt:
+      name: "{{ packages }}"
+      state: present
+    vars:
+      packages:
+        - python3
+        - python3-pip
+    become: yes
+
+  - name: upgrade pip
+    pip:
+      name: pip
+      executable: pip3
+      state: latest
+
+  - name: pip install
+    pip:
+      name:
+        - netifaces
+        - docker
+

@@ -3,4 +3,4 @@
   become: yes
   tasks:
     - name: upgrade all packages
-      yum: name=* state=latest
+      apt: name=* state=latest
