@@ -39,5 +39,5 @@ vagrant destroy #stops and deletes all traces of the vagrant machine
 ## リモートのサーバに適用するには
 下記コマンドで適用してください。ipaddressは適切なものに変更してください。ipアドレスの後ろの`,`は必須です
 ```
- ansible-playbook -u root -i [ipaddress], playbook/main.yml
+ ansible-playbook -u root -i [ipaddress], playbook/base_server_prov.yml
 ```
