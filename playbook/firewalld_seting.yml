@@ -2,8 +2,30 @@
 - hosts: all
   become: yes
   tasks:
+
+  - name: Allow everything and enable UFW
+    ufw:
+      state: enabled
+      policy: allow
+
+  - name: Set logging
+    ufw:
+      logging: 'True'
+
+  - name: "set the port state for ssh"
+    ufw:
+      rule: allow
+      port: '22'
+      proto: tcp
+
   - name: "set the port state for minecraft 25565-25575"
     ufw:
       rule: allow
       port: 25565:25575
+      proto: tcp
+
+  - name: "set the port state for webapi"
+    ufw:
+      rule: allow
+      port: '810'
       proto: tcp

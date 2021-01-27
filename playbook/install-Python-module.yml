@@ -23,4 +23,5 @@
       name:
         - netifaces
         - docker
-
+        - flask
+        - flask_restful
