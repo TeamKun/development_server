@@ -12,6 +12,23 @@ mkdir [お好きな名前]
 
 最後にIPとポートが表示されます
 
+
+参考:
+ホスト側の下記のディレクトリにプラグインとワールドデータが保存されます
+```
+/home/minecraft_ops/minecraft_data/[ディレクトリにつけた名前]/
+```
+
+マインクラフトのコンソールに入りたいときは
+```
+docker exec -i [ディレクトリにつけた名前] rcon-cli
+```
+
+Containerに入りたいとき
+```
+docker exec -it  [ディレクトリにつけた名前] /bin/bash
+```
+
 ## ローカルでのテスト
 ### windowsでの準備
 WSL環境でansibleとVagrantを使えるようにします。
