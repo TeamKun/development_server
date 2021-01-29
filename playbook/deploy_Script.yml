@@ -1,0 +1,16 @@
+---
+- hosts: all
+  become: yes
+  tasks:
+
+  - name : make minecraft_ops dir
+    file:
+      path: /home/minecraft_ops
+      state: directory
+      mode: 0755
+
+  - name: copy a directory
+    copy:
+      src: ../files/init-mc-Container.sh
+      dest: /home/minecraft_ops/
+      mode: 0755

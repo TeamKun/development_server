@@ -1,6 +1,17 @@
 # development_server
 メンバーが開発時に使用する使い捨てインスタンスを管理するサーバ
 
+# 開発サーバでのContainer起動方法
+
+```bash
+cd /home/minecraft_ops
+mkdir [お好きな名前]
+↑作ったディレクトリ内にプラグインを入れてね
+./init-mc-Container.sh [ディレクトリにつけた名前]
+```
+
+最後にIPとポートが表示されます
+
 ## ローカルでのテスト
 ### windowsでの準備
 WSL環境でansibleとVagrantを使えるようにします。
