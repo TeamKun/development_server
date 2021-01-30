@@ -6,8 +6,8 @@ IPADDRESS=$(ip -f inet -o addr show eth0|cut -d\  -f 7 | cut -d/ -f 1)
 docker ps -a -f name="^${CONTAINER_NAME}$" --format '{{.Names}}' | grep ${CONTAINER_NAME}  > /dev/null
 if [ "$?" = "0" ]; then
     docker restart ${CONTAINER_NAME}
-    exit 0
     echo "$IPADDRESS:$HOST_PORT"
+    exit 0
 fi
 
 mkdir -p ./minecraft_data/${CONTAINER_NAME}/
