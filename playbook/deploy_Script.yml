@@ -3,14 +3,40 @@
   become: yes
   tasks:
 
-  - name : make minecraft_ops dir
+  - name: Add the user 'minecraft'
+    user:
+      name: minecraft
+
+  - name : make minecraft dir
     file:
-      path: /home/minecraft_ops
+      path: /home/minecraft
       state: directory
+      owner: minecraft
       mode: 0755
 
-  - name: copy a directory
+  - name: copy scripts
     copy:
       src: ../files/init-mc-Container.sh
-      dest: /home/minecraft_ops/
+      dest: /home/minecraft/
+      mode: 0755
+
+  - name : make minecraft packs
+    file:
+      path: /home/minecraft/packs
+      state: directory
+      owner: minecraft
+      mode: 0755
+
+  - name : make minecraft data
+    file:
+      path: /home/minecraft/minecraft_data
+      state: directory
+      owner: minecraft
+      mode: 0755
+
+  - name : make minecraft config
+    file:
+      path: /home/minecraft/config
+      state: directory
+      owner: minecraft
       mode: 0755

@@ -4,19 +4,18 @@
 # 開発サーバでのContainer起動方法
 
 ```bash
-cd /home/minecraft_ops
-mkdir [お好きな名前]
+cd /home/minecraft
+mkdir ./packs/[お好きな名前]
 ↑作ったディレクトリ内にプラグインを入れてね。依存関係があるなら全部入れてね。
 ./init-mc-Container.sh [ディレクトリにつけた名前]
 ```
 
 最後にIPとポートが表示されます
 
-
 参考:
 ホスト側の下記のディレクトリにプラグインとワールドデータが保存されます
 ```
-/home/minecraft_ops/minecraft_data/[ディレクトリにつけた名前]/
+/home/minecraft/minecraft_data/[ディレクトリにつけた名前]/
 ```
 
 マインクラフトのコンソールに入りたいときは
