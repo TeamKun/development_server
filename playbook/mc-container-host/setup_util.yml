@@ -1,0 +1,19 @@
+---
+- hosts: all
+  become: yes
+  tasks: 
+
+  - name: Install zip packages
+    apt:
+      name: zip
+      state: present
+
+  - name: Same as previous but using entry shorthand
+    acl:
+      path: /home/minecraft/packs/
+      state: present
+      entity: minecraft
+      etype: group
+      permissions: rwx
+      recursive: yes
+      default: yes
