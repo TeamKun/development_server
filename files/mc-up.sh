@@ -3,8 +3,8 @@ CONTAINER_NAME=$1
 IPADDRESS=$(ip -f inet -o addr show eth0|cut -d\  -f 7 | cut -d/ -f 1)
 
 HOST_PORT=$(docker ps --format '{{.Ports}}' | awk -F'[:-]' '{print $2}' | sort -r | head -1 | awk '{nextport = $1+1} {print nextport}')
-if [ ! -n "$TEST" ]
-then 
+if [ ! -n "$HOST_PORT" ]
+then
     HOST_PORT=25565
 fi
 

@@ -1,6 +1,7 @@
 ---
-- import_playbook: update_all_pkgs.yml
-- import_playbook: install_docker.yml
-- import_playbook: firewalld_seting.yml
-- import_playbook: install-Python-module.yml
-- import_playbook: deploy_Script.yml
+- import_playbook: mc-container-host/update_all_pkgs.yml
+- import_playbook: mc-container-host/install_docker.yml
+- import_playbook: mc-container-host/firewalld_seting.yml
+- import_playbook: mc-container-host/install-Python-module.yml
+- import_playbook: mc-container-host/deploy_Script.yml
+- import_playbook: mc-container-host/install_util_pkgs.yml

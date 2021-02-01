@@ -14,9 +14,21 @@
       owner: minecraft
       mode: 0755
 
-  - name: copy scripts
+  - name: copy scripts mc-down.sh
     copy:
-      src: ../files/init-mc-Container.sh
+      src: ../../files/mc-down.sh
+      dest: /home/minecraft/
+      mode: 0755
+
+  - name: copy scripts mc-up.sh
+    copy:
+      src: ../../files/mc-up.sh
+      dest: /home/minecraft/
+      mode: 0755
+
+  - name: copy scripts mc-.shmc-command.sh
+    copy:
+      src: ../../files/mc-command.sh
       dest: /home/minecraft/
       mode: 0755
 
