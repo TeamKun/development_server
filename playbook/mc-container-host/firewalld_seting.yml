@@ -29,3 +29,9 @@
       rule: allow
       port: '810'
       proto: tcp
+    
+  - name: "set the port state for webapi"
+    ufw:
+      rule: allow
+      port: '22023'
+      proto: tcp
